@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'learninglog',
+    #'app1.apps.App1Config'.   This version is used from django 1.9 upward,
 )
 
 MIDDLEWARE_CLASSES = (

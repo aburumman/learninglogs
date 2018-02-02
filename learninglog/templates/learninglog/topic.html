@@ -1,0 +1,14 @@
+{% extends 'learninglog/header.html'%}
+{% block content%}
+<p>
+  Topic: {{ topic }}
+</p>
+{% for entry in topic_entry %}
+<p>
+Date Added:  {{ entry.date_added}}
+</p>
+<p> {{ entry|linebreaks }} </p>
+{% empty%}
+<p>No Entries for this Topic</p>
+{% endfor %}
+{% endblock %}

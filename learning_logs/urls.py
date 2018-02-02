@@ -18,5 +18,5 @@ from learninglog import urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include(urls)),
+    url(r'', include(urls, namespace='learninglog')),
 ]

@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     url(r'^index/$', views.index, name = 'index'),
     url(r'^places/$', views.places, name = 'places'),
-    #url(r'^admin/', include(admin.site.urls)),
-    #url(r'', include(learninglog.urls)),
-]
+    url(r'^home/$', views.home, name='home'),
+    url(r'^topics/$',views.topics, name = 'topics'),
+    url(r'^topic/(?P<topic_id>\d+)/$', views.topic, name = 'topic'),
+    ]

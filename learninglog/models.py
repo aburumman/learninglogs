@@ -8,7 +8,8 @@ class Topic(models.Model):
         return self.text
 
 class Entry(models.Model):
-    topic = models.ForeignKey(Topic)
+    ''' Entries of what you learnt on each topic '''
+    topic = models.ForeignKey(Topic, on_delete = models.CASCADE)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add = True)
 

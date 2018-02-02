@@ -1,11 +1,17 @@
-<!doctype html>
-<html>
-<head>
-  <title>  </title>
-  <link rel= 'stylesheet' href='{ static "style.css"}'  />
-</head>
-<body>
-
-</body>
-</body>
-</html>
+{% extends 'learninglog/header.html' %}
+{% block content %}
+<p>
+   Topics:
+</p>
+<div>
+  {% for topic in topics %}
+  <ul>
+    <li>
+      {{ topic.id }}  {{ topic }}
+    </li>
+  </ul>
+  {% empty %}
+  There are no topics
+  {% endfor %}
+</div>
+{% endblock content %}
