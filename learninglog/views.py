@@ -68,10 +68,11 @@ def edit_entry(request, entry_id):
         if form.is_valid():
             #entry = form.save(commit = FALSE)
             #entry.topic = topic
-            entry.save()
+            form.save()
             return HttpResponseRedirect(reverse('learninglog:topic', args=[topic.id]))
-        context = {'topic': topic, 'entry': entry, 'form': form}
-        return render('learninglog/edit_entry.html', context)
+
+    context = {'topic': topic, 'entry': entry, 'form': form}
+    return render(request, 'learninglog/edit_entry.html', context)
 
 
 
