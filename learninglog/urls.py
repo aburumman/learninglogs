@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^topics/$',views.topics, name = 'topics'),
     url(r'^topic/(?P<topic_id>\d+)/$', views.topic, name = 'topic'),
     url(r'^new_topic/$', views.new_topic, name = 'new_topic'),
-    url(r'^add_entry/$', views.new_topic, name = 'add_entry'),
-    url(r'^edit_entry/$', views.new_topic, name = 'edit_entry'),
+    url(r'^add_entry/(?P<topic_id>\d+)/$', views.add_entry, name = 'add_entry'),
+    url(r'^edit_entry/(?P<entry_id>\d+)/$', views.new_topic, name = 'edit_entry'),
     ]
