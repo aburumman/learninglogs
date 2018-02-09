@@ -1,0 +1,10 @@
+{% extends 'learninglog/header.html' %}
+{% block content %}
+<form action="{% url 'users:sign_up' %}" method = "POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <!-- <input type = 'submit' value = 'Sign Up' /> -->
+  <button name="submit">Sign Up</button>
+  <input type ='hidden' name ='next' value ='{% url "learninglog:home" %}'/>
+</form>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "learninglog/header.html" %}
+{% block content %}
+<form action="{% url 'users:login' %}" method = 'POST' type='password'>
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <input type="hidden" name = 'next' value="{% url 'learninglog:home' %}" />
+  <button type="password" name="submit">
+    Log In
+  </button>
+
+</form>
+{% endblock content %}
