@@ -47,7 +47,7 @@
 
 {% endcomment %}
   </style>
-<title> {{ page_title }} </title>
+<title>  </title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}" media="screen,projection"/>
 <html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -61,6 +61,15 @@
   </header>
   <a href='{% url 'learninglog:home' %}'>Learning Log</a> |
   <a href='{% url 'learninglog:topics' %}'>Topics</a> |
+  <p>
+    {% if user.is_authenticated %}
+    Welcome {{ user.username }} |
+    <a href='{% url "users:logout" %}'>Log Out</a>
+    {% else %}
+    <a href="{% url 'users:login' %}">Log In</a> |
+    <a href="{% url 'users:sign_up' %}">Sign Up</a>
+    {% endif%}
+  </p>
   {% block content %}
   {% endblock content %}
 </body>

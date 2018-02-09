@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'learninglog',
+    'users'
     #'app1.apps.App1Config'.   This version is used from django 1.9 upward,
 )
 
@@ -97,7 +98,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+LOGIN_URL = '/users/login/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
