@@ -1,0 +1,15 @@
+{% extends 'learninglog/header.html' %}
+{% block content %}
+<p>
+   <a href="{% url 'learninglog:topic' topic.id %}"> {{ topic }}</a>
+</p>
+<p>
+   Add A New Entry here
+</p>
+<form action= "{% url 'learninglog:add_entry' topic.id %}" method = 'POST'>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type = 'submit'value = "Add Entry" >
+  <!-- <button name="submit">add topic</button> -->
+</form>
+{% endblock %}
