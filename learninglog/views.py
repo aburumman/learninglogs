@@ -1,29 +1,22 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 from django.contrib.auth.views import logout, login
 from django.contrib.auth.decorators import login_required
 
-def index(request):
-    return HttpResponse("<p> This is the index page </p>")
-
 def home(request):
     context = {}
     return render(request, 'learninglog/home.html', context)
 
 
-
-def places(request):
-    page_title = 'The Places'
-    context = { 'page_title': page_title }
-    return render(request, 'learninglog/places.html', context)
-
 @login_required
 def topics(request):
     #topics = Topic.objects.all()
     topics = Topic.objects.filter(owner = request.user ).order_by('date_added')
+    #if topics.owner != request.user:
+        #raise Http404
     # topics = Topic.objects.order_by('date_added')
     context = {'topics': topics }
 
@@ -33,6 +26,8 @@ def topics(request):
 def topic(request, topic_id):
     topic = Topic.objects.get(id = topic_id)
     topic_entry = topic.entry_set.all()
+    if topic.owner != request.user:
+        raise Http404
     # topic_entry = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'topic_entry': topic_entry}
 
@@ -45,7 +40,9 @@ def new_topic(request):
     else:
         form = TopicForm(request.POST)
         if form.is_valid:
-            form.save()
+            new_topic = form.save(commit = False)
+            new_topic.owner = request.user
+            new_topic.save()
             return HttpResponseRedirect(reverse('learninglog:topics'))
     return render(request, 'learninglog/new_topic.html', {'form': form})
 
@@ -55,6 +52,8 @@ def add_entry(request, topic_id):
     topic = Topic.objects.get(id = topic_id)
     if request.method != 'POST':
         form = EntryForm()
+        if topic.owner != request.user:
+            raise Http404
     else:
         form = EntryForm(data = request.POST)
         if form.is_valid:
